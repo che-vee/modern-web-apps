@@ -27,23 +27,57 @@
             <div>
             <table class="mt-2 text-gray-600 dark:text-gray-400 text-lg">
                 <tr>
-                <th>Date</th>
-                <th>Temp (celcius)</th>
-                <th>Pressure</th>
-                <th>Humidity</th>
-                <th>Sunrise</th>
-                <th>Sunset</th>
+
+                @if(str_contains($sortby, "date"))
+                    @if($sortby == "date")
+                        <th>Date <a href="/?sortby=-date">&uarr;</a></th>
+                    @else
+                        <th>Date <a href="/?sortby=date">&darr;</a></th>
+                    @endif
+                @else
+                    <th>Date <a href="/?sortby=date">&darr;</a></th>
+                @endif
+
+                @if(str_contains($sortby, "temp"))
+                    @if($sortby == "temp")
+                        <th>Temp (C)<a href="/?sortby=-temp">&uarr;</a></th>
+                    @else
+                        <th>Temp (C) <a href="/?sortby=temp">&darr;</a></th>
+                    @endif
+                @else
+                    <th>Temp (C)<a href="/?sortby=temp">&darr;</a></th>
+                @endif
+
+                @if(str_contains($sortby, "pressure"))
+                    @if($sortby == "pressure")
+                        <th>Pressure  <a href="/?sortby=-pressure">&uarr;</a></th>
+                    @else
+                        <th>Pressure<a href="/?sortby=pressure">&darr;</a></th>
+                    @endif
+                @else
+                    <th>Pressure <a href="/?sortby=pressure">&darr;</a></th>
+                @endif
+                
+                @if(str_contains($sortby, "humidity"))
+                    @if($sortby == "humidity")
+                        <th>Humidity<a href="/?sortby=-humidity">&uarr;</a></th>
+                    @else
+                        <th>Humidity <a href="/?sortby=humidity">&darr;</a></th>
+                    @endif
+                @else
+                    <th> Humidity<a href="/?sortby=humidity">&darr;</a></th>
+                @endif
                 </tr>
-                @foreach($data['daily'] as $day)
+                @foreach($data as $day)
                 <tr>
-                    <td>{{date('m/d/Y', $day['dt'])}}</td>
-                    <td>{{$day['temp']['day']}}°</td>
+                    <td>{{$day['date']}}</td>
+                    <td>{{$day['temp']}}°</td>
                     <td>{{$day['pressure']}}</td>
                     <td>{{$day['humidity']}}</td>
-                    <td>{{date('H:i:s', $day['sunrise'])}}</td>
-                    <td>{{date('H:i:s', $day['sunset'])}}</td>
                 </tr>
                 @endforeach  
             </table>
     </body>
 </html>
+
+<a href="">&darr;</a>
