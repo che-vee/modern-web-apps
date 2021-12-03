@@ -30,42 +30,42 @@
 
                 @if(str_contains($sortby, "date"))
                     @if($sortby == "date")
-                        <th>Date <a href="/?sortby=-date">&uarr;</a></th>
+                        <th><a href="/?sortby=-date">Date &uarr;</a></th>
                     @else
-                        <th>Date <a href="/?sortby=date">&darr;</a></th>
+                        <th><a href="/?sortby=date">Date &darr;</a></th>
                     @endif
                 @else
-                    <th>Date <a href="/?sortby=date">&darr;</a></th>
+                    <th><a href="/?sortby=date">Date</a></th>
                 @endif
 
                 @if(str_contains($sortby, "temp"))
                     @if($sortby == "temp")
-                        <th>Temp (C)<a href="/?sortby=-temp">&uarr;</a></th>
+                        <th><a href="/?sortby=-temp">Temp (C) &uarr;</a></th>
                     @else
-                        <th>Temp (C) <a href="/?sortby=temp">&darr;</a></th>
+                        <th><a href="/?sortby=temp">Temp (C)&darr;</a></th>
                     @endif
                 @else
-                    <th>Temp (C)<a href="/?sortby=temp">&darr;</a></th>
+                    <th><a href="/?sortby=temp">Temp (C)</a></th>
                 @endif
 
                 @if(str_contains($sortby, "pressure"))
                     @if($sortby == "pressure")
-                        <th>Pressure  <a href="/?sortby=-pressure">&uarr;</a></th>
+                        <th><a href="/?sortby=-pressure">Pressure &uarr;</a></th>
                     @else
-                        <th>Pressure<a href="/?sortby=pressure">&darr;</a></th>
+                        <th><a href="/?sortby=pressure">Pressure &darr;</a></th>
                     @endif
                 @else
-                    <th>Pressure <a href="/?sortby=pressure">&darr;</a></th>
+                    <th><a href="/?sortby=pressure">Pressure</a></th>
                 @endif
                 
                 @if(str_contains($sortby, "humidity"))
                     @if($sortby == "humidity")
-                        <th>Humidity<a href="/?sortby=-humidity">&uarr;</a></th>
+                        <th><a href="/?sortby=-humidity">Humidity &uarr;</a></th>
                     @else
-                        <th>Humidity <a href="/?sortby=humidity">&darr;</a></th>
+                        <th><a href="/?sortby=humidity">Humidity &darr;</a></th>
                     @endif
                 @else
-                    <th> Humidity<a href="/?sortby=humidity">&darr;</a></th>
+                    <th><a href="/?sortby=humidity">Humidity</a></th>
                 @endif
                 </tr>
                 @foreach($data as $day)
