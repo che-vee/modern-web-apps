@@ -23,59 +23,23 @@
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             <div >
-            <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Seychelles Weather</h1>
-            <div>
-            <table class="mt-2 text-gray-600 dark:text-gray-400 text-lg">
-                <tr>
-
-                @if(str_contains($sortby, "date"))
-                    @if($sortby == "date")
-                        <th><a href="/?sortby=-date">Date &uarr;</a></th>
-                    @else
-                        <th><a href="/?sortby=date">Date &darr;</a></th>
-                    @endif
-                @else
-                    <th><a href="/?sortby=date">Date</a></th>
-                @endif
-
-                @if(str_contains($sortby, "temp"))
-                    @if($sortby == "temp")
-                        <th><a href="/?sortby=-temp">Temp (C) &uarr;</a></th>
-                    @else
-                        <th><a href="/?sortby=temp">Temp (C)&darr;</a></th>
-                    @endif
-                @else
-                    <th><a href="/?sortby=temp">Temp (C)</a></th>
-                @endif
-
-                @if(str_contains($sortby, "pressure"))
-                    @if($sortby == "pressure")
-                        <th><a href="/?sortby=-pressure">Pressure &uarr;</a></th>
-                    @else
-                        <th><a href="/?sortby=pressure">Pressure &darr;</a></th>
-                    @endif
-                @else
-                    <th><a href="/?sortby=pressure">Pressure</a></th>
-                @endif
-                
-                @if(str_contains($sortby, "humidity"))
-                    @if($sortby == "humidity")
-                        <th><a href="/?sortby=-humidity">Humidity &uarr;</a></th>
-                    @else
-                        <th><a href="/?sortby=humidity">Humidity &darr;</a></th>
-                    @endif
-                @else
-                    <th><a href="/?sortby=humidity">Humidity</a></th>
-                @endif
-                </tr>
-                @foreach($data as $day)
-                <tr>
-                    <td>{{$day['date']}}</td>
-                    <td>{{$day['temp']}}°</td>
-                    <td>{{$day['pressure']}}</td>
-                    <td>{{$day['humidity']}}</td>
-                </tr>
-                @endforeach  
-            </table>
+            <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Authors</h1>
+            
+            <form action="/authors" method="PUT">
+                @csrf
+        
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Name:</strong>
+                            <input type="text" name="name" value="{{ $author->name }}" class="form-control" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+        
+            </form>
     </body>
 </html>

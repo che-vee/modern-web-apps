@@ -23,57 +23,33 @@
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             <div >
-            <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Seychelles Weather</h1>
+            <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Authors</h1>
+            
+            <a class=" mt-2 text-gray-600 dark:text-gray-400 text-lg2 btn btn-success" href="{{ route('authors.create') }}"> Add Author</a>
+            
             <div>
             <table class="mt-2 text-gray-600 dark:text-gray-400 text-lg">
                 <tr>
-
-                @if(str_contains($sortby, "date"))
-                    @if($sortby == "date")
-                        <th><a href="/?sortby=-date">Date &uarr;</a></th>
-                    @else
-                        <th><a href="/?sortby=date">Date &darr;</a></th>
-                    @endif
-                @else
-                    <th><a href="/?sortby=date">Date</a></th>
-                @endif
-
-                @if(str_contains($sortby, "temp"))
-                    @if($sortby == "temp")
-                        <th><a href="/?sortby=-temp">Temp (C) &uarr;</a></th>
-                    @else
-                        <th><a href="/?sortby=temp">Temp (C)&darr;</a></th>
-                    @endif
-                @else
-                    <th><a href="/?sortby=temp">Temp (C)</a></th>
-                @endif
-
-                @if(str_contains($sortby, "pressure"))
-                    @if($sortby == "pressure")
-                        <th><a href="/?sortby=-pressure">Pressure &uarr;</a></th>
-                    @else
-                        <th><a href="/?sortby=pressure">Pressure &darr;</a></th>
-                    @endif
-                @else
-                    <th><a href="/?sortby=pressure">Pressure</a></th>
-                @endif
-                
-                @if(str_contains($sortby, "humidity"))
-                    @if($sortby == "humidity")
-                        <th><a href="/?sortby=-humidity">Humidity &uarr;</a></th>
-                    @else
-                        <th><a href="/?sortby=humidity">Humidity &darr;</a></th>
-                    @endif
-                @else
-                    <th><a href="/?sortby=humidity">Humidity</a></th>
-                @endif
+                    <th>ID</th>
+                    <th>Author</th>
                 </tr>
-                @foreach($data as $day)
+                @foreach($authors as $author)
                 <tr>
-                    <td>{{$day['date']}}</td>
-                    <td>{{$day['temp']}}°</td>
-                    <td>{{$day['pressure']}}</td>
-                    <td>{{$day['humidity']}}</td>
+                    <td>{{$author['id']}}</td>
+                    <td>{{$author['name']}}</td>
+                   
+                    <td>
+                        <form action="{{ route('authors.destroy',$author->id) }}" method="POST">
+    
+            
+                            <a class="btn btn-primary" href="{{ route('authors.edit',$author->id) }}">Edit</a>
+        
+                            @csrf
+                            @method('DELETE')
+            
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach  
             </table>

@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +22,6 @@ use App\Http\Controllers\WeatherController;
 // });
 
 Route::get('/', [WeatherController::class, 'getweather']);
+
+Route::resource('books', BookController::class);
+Route::resource('authors', AuthorController::class);
