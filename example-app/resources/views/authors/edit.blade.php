@@ -25,8 +25,9 @@
             <div >
             <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Authors</h1>
             
-            <form action="/authors" method="PUT">
+            <form action="/authors/{{$author->id}}" method="PUT">
                 @csrf
+                <input name="_method" type="hidden" value="PUT"></input>
         
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">

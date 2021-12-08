@@ -98,8 +98,7 @@ class BookController extends Controller
             $book->author = $request->get('author');
             $book->pages  = $request->get('pages');
             
-            
-            $book->update($request->all());
+            $book->save();
         
             return redirect()->route('books.index')
                             ->with('success','Book updated successfully');

@@ -25,9 +25,11 @@
             <div >
             <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Bookstore</h1>
             
-            <form action="/books" method="PUT">
+            <form action="/books/{{$book->id}}" method="POST">
                 @csrf
-        
+                <input name="_method" type="hidden" value="PUT"></input>
+                
+              
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
@@ -44,7 +46,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Author</strong>
-                            <textarea class="form-control" name="author" placeholder="Detail">{{ $book->author }}</textarea>
+                            <textarea class="form-control" name="author" placeholder="Author">{{ $book->author }}</textarea>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
