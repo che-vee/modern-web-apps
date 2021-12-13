@@ -69,7 +69,7 @@
                 </tr>
                 @if ($books->count() == 0)
                 <tr>
-                        <td colspan="5">No products to display.</td>
+                        <td colspan="5">No books to display.</td>
                 </tr>
                 @endif
                 @foreach($books as $book)
@@ -93,7 +93,8 @@
                 </tr>
                 @endforeach  
             </table>
-            <p class="justify-center mt-2 text-gray-600 dark:text-gray-400 text-lg2">{{ $books->withQueryString()->links() }}</p>
+            <div class="justify-center mt-2 text-gray-600 dark:text-gray-400 text-lg2">{{ $books->withQueryString()->render() }}</div>
+            
         </div> 
     </body>
 </html>

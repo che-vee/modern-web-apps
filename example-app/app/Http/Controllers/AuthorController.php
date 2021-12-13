@@ -12,11 +12,28 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $authors = Author::all();
+        $sort_by = $request->query('sortby');
 
-        return view("authors.index", ["authors"=>$authors]);
+            $order = 'ASC';
+    
+            $sort_by_key = $sort_by;
+    
+            if($sort_by != null) {
+                if($sort_by[0] == '-'){
+                    $order = 'DESC';
+                    $sort_by = substr($sort_by, 1);
+                }
+            }
+
+            if($sort_by == null) {
+                $sort_by = "id";
+            }
+
+        $authors = Author::orderBy($sort_by, $order)->Paginate(15);
+
+        return view("authors.index", ["authors"=>$authors, "sortby"=>$sort_by_key]);
     }
 
     /**

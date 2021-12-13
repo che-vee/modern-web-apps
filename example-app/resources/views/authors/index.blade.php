@@ -30,9 +30,31 @@
             <div>
             <table class="mt-2 text-gray-600 dark:text-gray-400 text-lg">
                 <tr>
-                    <th>ID</th>
-                    <th>Author</th>
+                    @if(str_contains($sortby, "id"))
+                        @if($sortby == "id")
+                            <th><a href="/authors/?sortby=-id">ID &uarr;</a></th>
+                        @else
+                            <th><a href="/authors/?sortby=id">ID &darr;</a></th>
+                        @endif
+                    @else
+                        <th><a href="/authors/?sortby=id">ID</a></th>
+                    @endif
+                    @if(str_contains($sortby, "name"))
+                        @if($sortby == "name")
+                            <th><a href="/authors/?sortby=-name">Name &uarr;</a></th>
+                        @else
+                            <th><a href="/authors/?sortby=name">Name &darr;</a></th>
+                        @endif
+                    @else
+                        <th><a href="/authors/?sortby=name">Name</a></th>
+                    @endif
+                    <th>Actions</th>
                 </tr>
+                @if ($authors->count() == 0)
+                <tr>
+                        <td colspan="5">No authors to display.</td>
+                </tr>
+                @endif
                 @foreach($authors as $author)
                 <tr>
                     <td>{{$author['id']}}</td>
@@ -53,5 +75,6 @@
                 </tr>
                 @endforeach  
             </table>
+            <div class="justify-center mt-2 text-gray-600 dark:text-gray-400 text-lg2">{{ $authors->withQueryString()->render() }}</div>
     </body>
 </html>

@@ -31,8 +31,8 @@ class BookController extends Controller
                 $sort_by = "id";
             }
 
-            
             $books = Book::orderBy($sort_by, $order)->Paginate(15);      
+
             return view("books.index", ["books"=>$books, "sortby"=>$sort_by_key]);
         }
     
@@ -54,15 +54,6 @@ class BookController extends Controller
             */
         public function store(Request $request)
         {
-            // $request->validate([
-            //     'name'        => 'required',
-            //     'author'      => 'required',
-            //     'pages'       => 'required|numeric'
-
-            // ]);
-        
-            // Book::create(Request::all());
-         
             $book = new Book;
             $book->book   = $request->get('book');
             $book->author = $request->get('author');
