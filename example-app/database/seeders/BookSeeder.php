@@ -14,6 +14,7 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
+        
         $books = [
             ["book" => "Ulysses", "author" => 1, "pages" => 500],
             ["book" => "The Great Gatsby", "author" => 2, "pages" => 262],

@@ -22,20 +22,56 @@
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <div >
+           <div>
             <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Bookstore</h1>
             
             <a class=" mt-2 text-gray-600 dark:text-gray-400 text-lg2 btn btn-success" href="{{ route('books.create') }}"> Create New Product</a>
             
-            <div>
             <table class="mt-2 text-gray-600 dark:text-gray-400 text-lg">
                 <tr>
-                    <th>ID</th>
-                    <th>Author</th>
-                    <th>Pages</th>
-                    <th>Book</th>
+                    @if(str_contains($sortby, "id"))
+                        @if($sortby == "id")
+                            <th><a href="/books/?sortby=-id">ID &uarr;</a></th>
+                        @else
+                            <th><a href="/books/?sortby=id">ID &darr;</a></th>
+                        @endif
+                    @else
+                        <th><a href="/books/?sortby=id">ID</a></th>
+                    @endif
+                    @if(str_contains($sortby, "author"))
+                        @if($sortby == "author")
+                            <th><a href="/books/?sortby=-author">Author &uarr;</a></th>
+                        @else
+                            <th><a href="/books/?sortby=author">Author &darr;</a></th>
+                        @endif
+                    @else
+                        <th><a href="/books/?sortby=author">Author</a></th>
+                    @endif
+                    @if(str_contains($sortby, "pages"))
+                        @if($sortby == "pages")
+                            <th><a href="/books/?sortby=-pages">Pages &uarr;</a></th>
+                        @else
+                            <th><a href="/books/?sortby=pages">Pages &darr;</a></th>
+                        @endif
+                    @else
+                        <th><a href="/books/?sortby=pages">Pages</a></th>
+                    @endif
+                    @if(str_contains($sortby, "book"))
+                        @if($sortby == "book")
+                            <th><a href="/books/?sortby=-book">Book &uarr;</a></th>
+                        @else
+                            <th><a href="/books/?sortby=book">Book &darr;</a></th>
+                        @endif
+                    @else
+                        <th><a href="/books/?sortby=book">Book</a></th>
+                    @endif
                     <th>Action</th>
                 </tr>
+                @if ($books->count() == 0)
+                <tr>
+                        <td colspan="5">No products to display.</td>
+                </tr>
+                @endif
                 @foreach($books as $book)
                 <tr>
                     <td>{{$book['id']}}</td>
@@ -57,5 +93,7 @@
                 </tr>
                 @endforeach  
             </table>
+            <p class="justify-center mt-2 text-gray-600 dark:text-gray-400 text-lg2">{{ $books->withQueryString()->links() }}</p>
+        </div> 
     </body>
 </html>

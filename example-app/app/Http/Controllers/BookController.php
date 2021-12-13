@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use \Illuminate\Http\Request;
 use App\Models\Book;
 
-
-
 class BookController extends Controller
 {
     /**
@@ -14,10 +12,27 @@ class BookController extends Controller
         *
         * @return \Illuminate\Http\Response
         */
-        public function index()
+        public function index(Request $request)
         {
-            $books = Book::all();
-            return view("books.index", ["books"=>$books]);
+            $sort_by = $request->query('sortby');
+
+            $order = 'ASC';
+    
+            $sort_by_key = $sort_by;
+    
+            if($sort_by != null) {
+                if($sort_by[0] == '-'){
+                    $order = 'DESC';
+                    $sort_by = substr($sort_by, 1);
+                }
+            }
+
+            if($sort_by == null) {
+                $sort_by = "id";
+            }
+            // dd($sort_by, $order);
+            $books = Book::orderBy($sort_by, $order)->Paginate(5);
+            return view("books.index", ["books"=>$books, "sortby"=>$sort_by_key]);
         }
     
         /**
@@ -99,6 +114,7 @@ class BookController extends Controller
             $book->pages  = $request->get('pages');
             
             $book->save();
+            // $book->update($request->all());
         
             return redirect()->route('books.index')
                             ->with('success','Book updated successfully');
@@ -117,7 +133,7 @@ class BookController extends Controller
 
     
             return redirect()->route('books.index')
-                        ->with('success','Product deleted successfully');
+                        ->with('success','Book deleted successfully');
         
         }
 }

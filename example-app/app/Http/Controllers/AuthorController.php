@@ -39,7 +39,6 @@ class AuthorController extends Controller
     {
         $author = new Author;
         $author->name = $request->get('name');
-        
             
         $author->save();
         return redirect()->route('authors.index')
