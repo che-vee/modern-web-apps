@@ -30,8 +30,9 @@ class BookController extends Controller
             if($sort_by == null) {
                 $sort_by = "id";
             }
-            // dd($sort_by, $order);
-            $books = Book::orderBy($sort_by, $order)->Paginate(5);
+
+            
+            $books = Book::orderBy($sort_by, $order)->Paginate(15);      
             return view("books.index", ["books"=>$books, "sortby"=>$sort_by_key]);
         }
     

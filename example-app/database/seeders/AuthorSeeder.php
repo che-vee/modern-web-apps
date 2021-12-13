@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Author;
 
 class AuthorSeeder extends Seeder
 {
@@ -14,18 +14,13 @@ class AuthorSeeder extends Seeder
      */
     public function run()
     {
-        $authors = [
-            ["name" => "Joseph Conrad"],
-            ["name" => "Vladimir Nabokov"],
-            ["name" => "F. Scott Fitzgerald"],
-            ["name" => "Gabriel Garcia Marquez"],
-            ["name" => "James Joyce"],
-            ["name" => "Joseph Heller"],
-            ["name" => "William Shakespeare"],
-            ["name" => "Virginia Woolf"],
-        ];
+        $faker = \Faker\Factory::create();
 
-        DB::table("authors")->insert($authors);
+        for($i = 0; $i < 100; $i++) {
+            Author::create([
+                'name' => $faker->name,
+            ]);
+        }
 
     }
 }
