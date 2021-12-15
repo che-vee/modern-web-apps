@@ -16,11 +16,10 @@ class AuthorSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Author::create([
                 'name' => $faker->name,
             ]);
         }
-
     }
 }

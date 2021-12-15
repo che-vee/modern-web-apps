@@ -16,24 +16,24 @@ class AuthorController extends Controller
     {
         $sort_by = $request->query('sortby');
 
-            $order = 'ASC';
-    
-            $sort_by_key = $sort_by;
-    
-            if($sort_by != null) {
-                if($sort_by[0] == '-'){
-                    $order = 'DESC';
-                    $sort_by = substr($sort_by, 1);
-                }
-            }
+        $order = 'ASC';
 
-            if($sort_by == null) {
-                $sort_by = "id";
+        $sort_by_key = $sort_by;
+
+        if ($sort_by != null) {
+            if ($sort_by[0] == '-') {
+                $order = 'DESC';
+                $sort_by = substr($sort_by, 1);
             }
+        }
+
+        if ($sort_by == null) {
+            $sort_by = "id";
+        }
 
         $authors = Author::orderBy($sort_by, $order)->Paginate(15);
 
-        return view("authors.index", ["authors"=>$authors, "sortby"=>$sort_by_key]);
+        return view("authors.index", ["authors" => $authors, "sortby" => $sort_by_key]);
     }
 
     /**
@@ -56,12 +56,12 @@ class AuthorController extends Controller
     {
         $author = new Author;
         $author->name = $request->get('name');
-            
+
         $author->save();
         return redirect()->route('authors.index')
-                    ->with('success','Author created successfully.');
+            ->with('success', 'Author created successfully.');
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -73,7 +73,7 @@ class AuthorController extends Controller
     {
         $author = Author::find($id);
 
-        return view('authors.show',compact('author'));
+        return view('authors.show', compact('author'));
     }
 
     /**
@@ -86,7 +86,7 @@ class AuthorController extends Controller
     {
         $author = Author::find($id);
 
-        return view('authors.edit',compact('author'));
+        return view('authors.edit', compact('author'));
     }
 
     /**
@@ -100,11 +100,11 @@ class AuthorController extends Controller
     {
         $author = Author::find($id);
         $author->name = $request->get('name');
-            
+
         $author->save();
 
         return redirect()->route('authors.index')
-                            ->with('success','Author updated successfully');
+            ->with('success', 'Author updated successfully');
     }
 
     /**
@@ -119,6 +119,6 @@ class AuthorController extends Controller
         $author->delete();
 
         return redirect()->route('authors.index')
-                        ->with('success','Author deleted successfully');
+            ->with('success', 'Author deleted successfully');
     }
 }

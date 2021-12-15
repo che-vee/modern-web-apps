@@ -16,7 +16,7 @@ class BookSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Book::create([
                 'book' => ucwords($faker->words(rand(1, 4), true)),
                 'author' => $faker->unique(false)->numberBetween(1, 100),

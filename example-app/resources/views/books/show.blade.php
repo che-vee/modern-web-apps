@@ -25,24 +25,25 @@
 <body class="antialiased">
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         <div>
-            <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Author</h1>
+            <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">{{ $book->book}}</h1>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
 
-            <form class="mt-2 text-gray-600 dark:text-gray-400 text-lg" action='/authors' method="POST">
-                @csrf
+                    <strong class="dark:text-gray-400">ID: {{ $book->id }}</strong>
 
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Author</strong>
-                            <input type="text" name="name" class="form-control" placeholder="Name">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
 
-            </form>
+                    <strong class="dark:text-gray-400">Pages: {{ $book->pages }}</strong>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+
+                    <strong class="dark:text-gray-400">Author: {{ $book->author }}</strong>
+
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>
