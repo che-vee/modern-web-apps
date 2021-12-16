@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use \Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\File;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
@@ -60,12 +61,19 @@ class BookController extends Controller
         $book->book   = $request->get('book');
         $book->author = $request->get('author');
         $book->pages  = $request->get('pages');
-
-        $images = $request->file('images');
-        $descriptions = $request->get('descriptions');
-
-
         $book->save();
+
+        $image = $request->file('image');
+        $description = $request->get('description');
+
+        $image->store('files', 'public');
+        $file = new File;
+        $file->path = $image->hashName();
+        $file->description = $description;
+        $file->book = $book->id;
+
+        $file->save();
+
         return redirect()->route('books.index')
             ->with('success', 'Book created successfully.');
     }
@@ -79,8 +87,10 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
+        $files = File::where('book', '=', $id)->get();
+        // ddd($files);
 
-        return view('books.show', compact('book'));
+        return view('books.show', compact(['book', 'files']));
     }
 
     /**
@@ -112,7 +122,6 @@ class BookController extends Controller
         $book->pages  = $request->get('pages');
 
         $book->save();
-        // $book->update($request->all());
 
         return redirect()->route('books.index')
             ->with('success', 'Book updated successfully');

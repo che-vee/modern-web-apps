@@ -42,6 +42,12 @@
                     <strong class="dark:text-gray-400">Author: {{ $book->author }}</strong>
 
                 </div>
+                @foreach($files as $file)
+
+                <img src="{{ url('storage/files/'.$file->path) }}" />
+                <strong class="dark:text-gray-400">{{$file->description}}</strong>
+                @endforeach
+
             </div>
         </div>
 </body>

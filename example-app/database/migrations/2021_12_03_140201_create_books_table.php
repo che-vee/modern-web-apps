@@ -22,7 +22,7 @@ class CreateBooksTable extends Migration
             // $table->foreign("author")->references("id")->on("authors")->onDelete("cascade");
         });
 
-        Schema::table("books", function($table){
+        Schema::table("books", function ($table) {
             $table->foreign("author")->references("id")->on("authors")->onDelete("cascade");
         });
     }

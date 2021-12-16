@@ -27,7 +27,7 @@
         <div>
             <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Bookstore</h1>
 
-            <form class="mt-2 text-gray-600 dark:text-gray-400 text-lg" action='/books' method="POST">
+            <form class="mt-2 text-gray-600 dark:text-gray-400 text-lg" action='/books' method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
@@ -47,6 +47,21 @@
                         <div class="form-group">
                             <strong>Author:</strong>
                             <input class="form-control" name="author" placeholder="Author"></input>
+                        </div>
+                    </div>
+                   
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Upload image:</strong>
+
+                            <input type="file" name="image">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Description:</strong>
+                            <input class="form-control" name="description" placeholder="Description"></input>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
