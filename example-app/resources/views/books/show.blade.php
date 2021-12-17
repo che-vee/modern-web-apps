@@ -44,7 +44,11 @@
                 </div>
                 @foreach($files as $file)
 
-                <img src="{{ url('storage/files/'.$file->path) }}" />
+                <!-- <img src="{{ url('storage/files/'.$file->path) }}"> -->
+                <a href="{{ url('storage/files/'.$file->path) }}">
+                    <img src="{{ url('storage/'.$file->path) }}"/>
+                </a>
+
                 <strong class="dark:text-gray-400">{{$file->description}}</strong>
                 @endforeach
 

@@ -5,7 +5,6 @@ use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +16,15 @@ use App\Http\Controllers\AuthorController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
 
 Route::get('/', [WeatherController::class, 'getweather']);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ThumbnailJob;
 use \Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\File;
@@ -67,6 +68,7 @@ class BookController extends Controller
         $description = $request->get('description');
 
         $image->store('files', 'public');
+        dispatch(new ThumbnailJob($image->getRealPath(), $image->hashName()));
         $file = new File;
         $file->path = $image->hashName();
         $file->description = $description;
