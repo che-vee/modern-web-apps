@@ -20,7 +20,8 @@ class BookSeeder extends Seeder
             Book::create([
                 'book' => ucwords($faker->words(rand(1, 4), true)),
                 'author' => $faker->unique(false)->numberBetween(1, 100),
-                'pages' => $faker->unique(true)->numberBetween(100, 1000)
+                'pages' => $faker->unique(true)->numberBetween(100, 1000),
+                'user_id' => 1
             ]);
         }
     }

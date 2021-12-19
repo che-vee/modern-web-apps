@@ -23,10 +23,17 @@
 </head>
 
 <body class="antialiased">
+    {{ $errors->first() }}
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         <div>
             <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-lg2">Bookstore</h1>
 
+            <a class=" mt-2 text-gray-600 dark:text-gray-400 text-lg2 btn btn-success" href="{{ route('login') }}"> Login</a><br />
+            @auth
+            <p class=" mt-2 text-gray-600 dark:text-gray-400 text-lg2 btn btn-success">Welcome {{ Auth::user()->name }}</p>
+            @endauth
+            <a class=" mt-2 text-gray-600 dark:text-gray-400 text-lg2 btn btn-success" href="{{ Auth::logout() }}"> Logout</a><br />
+           
             <a class=" mt-2 text-gray-600 dark:text-gray-400 text-lg2 btn btn-success" href="{{ route('books.create') }}"> Create New Product</a>
 
             <table class="mt-2 text-gray-600 dark:text-gray-400 text-lg">

@@ -19,6 +19,7 @@ class AuthorSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             Author::create([
                 'name' => $faker->name,
+                'user_id' => 1
             ]);
         }
     }

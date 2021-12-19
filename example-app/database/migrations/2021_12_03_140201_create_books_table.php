@@ -18,12 +18,13 @@ class CreateBooksTable extends Migration
             $table->string("book");
             $table->integer("author")->unsigned();
             $table->integer("pages");
+            $table->bigInteger("user_id")->unsigned();
             $table->timestamps();
-            // $table->foreign("author")->references("id")->on("authors")->onDelete("cascade");
         });
 
         Schema::table("books", function ($table) {
             $table->foreign("author")->references("id")->on("authors")->onDelete("cascade");
+            $table->foreign("user_id")->references("id")->on("users");
         });
     }
 

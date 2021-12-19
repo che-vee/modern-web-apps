@@ -7,6 +7,8 @@ use \Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class BookController extends Controller
 {
@@ -34,8 +36,7 @@ class BookController extends Controller
             $sort_by = "id";
         }
 
-        $books = Book::orderBy($sort_by, $order)->paginate(15);
-        // $books = DB::table('books')->orderBy($sort_by, $order)->paginate(15);     
+        $books = Book::orderBy($sort_by, $order)->paginate(15);    
 
         return view("books.index", ["books" => $books, "sortby" => $sort_by_key]);
     }
@@ -45,8 +46,13 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if (Auth::check() == false) {
+            return redirect()->back()
+                ->withErrors('Only authorized users can create books');
+        }
+
         return view("books.create");
     }
 
@@ -58,6 +64,11 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::check() == false) {
+            return redirect()->back()
+                ->withErrors('Only authorized users can create books');
+        }
+
         $book = new Book;
         $book->book   = $request->get('book');
         $book->author = $request->get('author');
@@ -101,9 +112,14 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $book = Book::find($id);
+        if (Auth::id() != $book->user_id) {
+            return redirect()->back()
+                ->withErrors('Only authorized users can edit this book');
+        }
+
 
         return view('books.edit', compact('book'));
     }
@@ -122,6 +138,7 @@ class BookController extends Controller
         $book->book   = $request->get('book');
         $book->author = $request->get('author');
         $book->pages  = $request->get('pages');
+        $book->user_id = Auth::id();
 
         $book->save();
 
@@ -135,11 +152,16 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $book = Book::find($id);
         $book->delete();
 
+        if (Auth::id() != $book->user_id) {
+            return redirect()->route('books.index')
+                ->withErrors('Only authorized users can delete this book')
+                ->withInput($request->except('password'));
+        }
 
         return redirect()->route('books.index')
             ->with('success', 'Book deleted successfully');
