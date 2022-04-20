@@ -27,21 +27,53 @@
             <div>
             <table class="mt-2 text-gray-600 dark:text-gray-400 text-lg">
                 <tr>
-                <th>Date</th>
-                <th>Temp (celcius)</th>
-                <th>Pressure</th>
-                <th>Humidity</th>
-                <th>Sunrise</th>
-                <th>Sunset</th>
+
+                @if(str_contains($sortby, "date"))
+                    @if($sortby == "date")
+                        <th><a href="/?sortby=-date">Date &uarr;</a></th>
+                    @else
+                        <th><a href="/?sortby=date">Date &darr;</a></th>
+                    @endif
+                @else
+                    <th><a href="/?sortby=date">Date</a></th>
+                @endif
+
+                @if(str_contains($sortby, "temp"))
+                    @if($sortby == "temp")
+                        <th><a href="/?sortby=-temp">Temp (C) &uarr;</a></th>
+                    @else
+                        <th><a href="/?sortby=temp">Temp (C)&darr;</a></th>
+                    @endif
+                @else
+                    <th><a href="/?sortby=temp">Temp (C)</a></th>
+                @endif
+
+                @if(str_contains($sortby, "pressure"))
+                    @if($sortby == "pressure")
+                        <th><a href="/?sortby=-pressure">Pressure &uarr;</a></th>
+                    @else
+                        <th><a href="/?sortby=pressure">Pressure &darr;</a></th>
+                    @endif
+                @else
+                    <th><a href="/?sortby=pressure">Pressure</a></th>
+                @endif
+                
+                @if(str_contains($sortby, "humidity"))
+                    @if($sortby == "humidity")
+                        <th><a href="/?sortby=-humidity">Humidity &uarr;</a></th>
+                    @else
+                        <th><a href="/?sortby=humidity">Humidity &darr;</a></th>
+                    @endif
+                @else
+                    <th><a href="/?sortby=humidity">Humidity</a></th>
+                @endif
                 </tr>
-                @foreach($data['daily'] as $day)
+                @foreach($data as $day)
                 <tr>
-                    <td>{{date('m/d/Y', $day['dt'])}}</td>
-                    <td>{{$day['temp']['day']}}°</td>
+                    <td>{{$day['date']}}</td>
+                    <td>{{$day['temp']}}°</td>
                     <td>{{$day['pressure']}}</td>
                     <td>{{$day['humidity']}}</td>
-                    <td>{{date('H:i:s', $day['sunrise'])}}</td>
-                    <td>{{date('H:i:s', $day['sunset'])}}</td>
                 </tr>
                 @endforeach  
             </table>
